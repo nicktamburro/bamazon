@@ -47,28 +47,31 @@ inquirer.prompt([
 
         }
     })
-])    
+])   */
 
 
 function viewProducts() {
         connection.query("SELECT * FROM products", function (err, res) {
             if (err) throw err;
-
+           console.log("All items for sale:");
             for (var i = 0; i < res.length; i++) {
+                
                 console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].department_name + " | " + res[i].price
                     + " | " + res[i].stock_quantity)
 
             }
-            //console.log(res[0].artist);
+        
         });
     };
 
 function viewLowInventory() {
     connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
-
+         console.log("Items with low inventory");
         for (var i = 0; i < res.length; i++) {
+           
             if (res[i].stock_quantity <= 3) {
+                
                 console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].department_name + " | " + res[i].price
                     + " | " + res[i].stock_quantity)
 
@@ -99,3 +102,6 @@ function addNewProduct() {
 
 })
 }
+
+viewProducts();
+viewLowInventory();
